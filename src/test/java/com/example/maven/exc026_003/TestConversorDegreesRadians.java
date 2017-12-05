@@ -1,13 +1,16 @@
 package com.example.maven.exc026_003;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import java.util.Random;
+import java.util.logging.Logger;
+import org.junit.Test;
+
 
 public class TestConversorDegreesRadians {
 
 	ConversorDegreesRadians cdr = new ConversorDegreesRadians();
 	Random random = new Random();
+	private static final Logger LOG = Logger.getLogger(ConversorDegreesRadians.class.getName());
 
 	// hjälpmetod!!!
 	public double toRadians(double valueDegrees) {
@@ -30,33 +33,24 @@ public class TestConversorDegreesRadians {
 	
 	@Test
 	public void testToRadians() {
-		assertEquals(toRadians(3.8), cdr.convertDegreesToRadians(3.8), 0.1);
+		double randomValue = 0.0; 
 		
+		for (int i = 0; i < 100000000; i++) {
+			randomValue = random.nextDouble()*100; 
+			LOG.info("Testing the method degreesToRadians with " + randomValue);
+			assertEquals(toRadians(randomValue), cdr.convertDegreesToRadians(randomValue), 0.1);
+		}
 	}
+	
 	
 	@Test
 	public void testToDegrees() {
-		assertEquals(toDegrees(3.8), cdr.convertRadiansToDegrees(3.8), 0.1);
+		double randomValue = 0.0; 
 		
+		for (int i = 0; i < 10; i++) {
+			randomValue = random.nextDouble()*100; 
+			LOG.info("Testing the method radiansToDegrees with " + randomValue);
+			assertEquals(toDegrees(randomValue), cdr.convertRadiansToDegrees(randomValue), 0.1);
+		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
